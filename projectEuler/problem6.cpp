@@ -18,9 +18,7 @@ long sum = 100 * (100 + 1) / 2;
 long square = 100 * (100 + 1) * (200 + 1) / 6;
 
 cout << "Answer: " <<  sum * sum - square << endl;
-
-time = clock() - time;
-cout << "Seconds: " << time / (double) CLOCKS_PER_SEC;
+cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
 return 1;
 };
 

@@ -3,6 +3,7 @@
 //Thomas Salemy
 
 #include <iostream>
+#include "time.h"
 using namespace std;
 
 
@@ -17,7 +18,9 @@ int sumFunction(int multiple, int MAX) {
 };
 
 int main() {
+clock_t time = clock();
 int sum = sumFunction(3, 999) + sumFunction(5, 999) - sumFunction(15, 999);
-cout << sum;
+cout << "Answer: " <<  sum << endl;
+cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
 
 };

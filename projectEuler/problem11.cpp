@@ -8,11 +8,14 @@
 
 #include <iostream>
 #include <fstream>
+#include "time.h"
 using namespace std;
 
 
 
 int main() {
+
+    clock_t time = clock();
     int MAXSIZE = 19;
     int map[20][20] = { {0} };
     ifstream file("problem11.txt");
@@ -111,4 +114,5 @@ int main() {
         }
     }
     cout << "Answer: " << maxProduct << endl;
+    cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
 };

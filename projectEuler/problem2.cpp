@@ -3,6 +3,7 @@
 //Thomas Salemy
 
 #include <iostream>
+#include "time.h"
 using namespace std;
 
 int nextNum(int current, int previous) {
@@ -11,6 +12,7 @@ int nextNum(int current, int previous) {
 
 int main() {
 
+clock_t time = clock();
 //Initial Values
 int current = 8;
 int previous = 2;
@@ -24,7 +26,8 @@ while (next < 4000000) {
 	current = next;
 }
 
-cout << sum;
+cout << "Answer: " << sum << endl;
+cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
 return 0;
 };
 	

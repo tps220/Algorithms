@@ -81,26 +81,23 @@ bool isPalindrome(int number) {
 };
 int main() {
 
-clock_t start = clock();
+clock_t time = clock();
 const int max = 999 * 999;
 for (int i = max; i > 100000; i--) {
 	if (isPalindrome(i)) {
 		if ( ! isPrime(i) ) {
 			for (int j = 999; j > 100; j--) {
 				if ( i % j  == 0 && i / j < 1000) {
-					cout << j << " * " << i / j << " = "<<  i << endl;
-					clock_t end = clock();
-					double time = (double)(end - start);
-					cout << time / CLOCKS_PER_SEC ;
-					return 1;	
+					cout << "Answer: " <<  j << " * " << i / j << " = "<<  i << endl;
+					cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
+					return 0;	
 				}	
 
 			}
 		}
 	}
 }
-cout << "none found";
+cout << endl;
 
-
-return 1;
+return 0;
 };

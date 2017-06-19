@@ -22,7 +22,7 @@ int power(int a, int b) {
 
 
 int main() {
-    clock_t start = clock();
+    clock_t time = clock();
     vector<int> factorMap;
     //initializes 20 values to zero (this is for all the factors, which are represented by the index
     //of the vector
@@ -45,7 +45,7 @@ int main() {
     for (int i = 2; i < factorMap.size(); i++) {
         finalNumber = finalNumber * power(i, factorMap[i]);
     }
-    clock_t stop = clock();
-    cout << "Number: " << finalNumber << " took " << (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC << endl;
-    return 1;
+    cout << "Answer: " << finalNumber << endl;
+    cout << "Time: " << (double)(clock() - time)  / (double)  CLOCKS_PER_SEC << endl;
+    return 0;
 };

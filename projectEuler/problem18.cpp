@@ -53,14 +53,14 @@ using namespace std;
 
 
 int main() {
-    
+
     clock_t time = clock();
     int MAX = 0;
-    
+
     //Open text file
     ifstream file("problem18.txt");
     if (file.is_open()) {
-        
+
         //If file is succesfully opened, read in the values and
         //dynamically create a ragged array
         //that represents the triangle as a staircase of numbers.
@@ -69,7 +69,7 @@ int main() {
         for (int i = 0, count = 1; i < 15; i++, count++) {
             numberMap[i] = new int[count];
         }
-        
+
         //Variables for row of triangle and column of the
         //triangle will be dynamically calculated based
         //on the current count.
@@ -96,8 +96,8 @@ int main() {
             }
             count++;
         }
-        
-        
+
+
         //Start our algorithm
         for (int i = 1; i < 15; i++) {
             for (int k = 0; k < i + 1; k++) {
@@ -117,13 +117,19 @@ int main() {
                 }
             }
         }
-        
+
         //Find max number in the last row, our answer
         for (int i = 0; i < 15; i++) {
             if (numberMap[14][i] > MAX) {
                 MAX = numberMap[14][i];
             }
         }
+
+        //Delete numberMap
+        for (int i = 0; i < 15; i++) {
+          delete [] numberMap[i];
+        }
+        delete [] numberMap;
     }
     else {
         cout << "File could not be opened" << endl;

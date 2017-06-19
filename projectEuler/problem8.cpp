@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <fstream>
+#include "time.h"
 using namespace std;
 
 //The only solution I can think of for this one is to calculate the product of each 13 digit sequence,
@@ -15,6 +16,8 @@ using namespace std;
 //100% confidence the solution is correct
 
 int main() {
+
+    clock_t time = clock();
     ifstream file("problem8.txt");
     int numberMap[1000];
     if ( file.is_open() ) {
@@ -46,5 +49,6 @@ int main() {
     else {
         cout << "file not found" << endl;
     }
-    return 1;
+    cout << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
+    return 0;
 }
