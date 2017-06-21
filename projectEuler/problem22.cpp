@@ -15,7 +15,7 @@ void merge(vector<string> &map, int lower, int middle, int higher) {
     int i, j, k;
 
     for (i = 0; i < arr1; i++) {
-        firstHalf[i] = map[i];
+        firstHalf[i] = map[i + lower];
     }
     for (i = 0; i < arr2; i++) {
         secondHalf[i] = map[middle + 1 + i];
@@ -25,28 +25,27 @@ void merge(vector<string> &map, int lower, int middle, int higher) {
     j = 0;
     k = 0;
     while (j < arr1 && k < arr2) {
-        if (firstHalf[j][0] < secondHalf[k][0]) {
-            map[i] = firstHalf[j];
+        if (firstHalf[j] <= secondHalf[k]) {
+            map[i + lower] = firstHalf[j];
             j++;
         }
         else {
-            map[i] = secondHalf[k];
+            map[i + lower] = secondHalf[k];
             k++;
         }
         i++;
     }
 
     while (j < arr1) {
-        map[i] = firstHalf[j];
+        map[i + lower] = firstHalf[j];
         j++;
         i++;
     }
     while (k < arr2) {
-        map[i] = secondHalf[k];
+        map[i + lower] = secondHalf[k];
         k++;
         i++;
     }
-
     delete [] firstHalf;
     delete [] secondHalf;
 };
@@ -54,7 +53,7 @@ void merge(vector<string> &map, int lower, int middle, int higher) {
 
 void mergeSort(vector<string> &map, int lower, int higher) {
     if (higher > lower) {
-        int middle = (lower + higher) / 2;
+        int middle = lower + (higher - lower) / 2;
         mergeSort(map, lower, middle);
         mergeSort(map, middle + 1, higher);
         merge(map, lower, middle, higher);
@@ -67,14 +66,21 @@ void mergeSort(vector<string> &map, int lower, int higher) {
 
 
 int main() {
+
+    clock_t time = clock();
+
+
     vector<string> nameList;
-    ifstream file("problem22.txt");
+    nameList.push_back("");
+
+    ifstream file("/Users/tsalemy/Desktop/Debug/en.lproj/problem22.txt");
     if ( file.is_open() ) {
         int count = 0;
         char ch;
         while (file >> ch) {
             if (ch == 44) {
                 count++;
+                nameList.push_back("");
             }
             else if (ch != 34) {
                 nameList[count] += ch;
@@ -85,8 +91,16 @@ int main() {
     else {
         cout << "File not found" << endl;
     }
-    for (int i = 0; i < 40; i++) {
-        cout << nameList[i] << endl;
+    long long SUM = 0;
+    for (int i = 0; i < nameList.size(); i++) {
+        int temp = 0;
+        for (int k = 0; k < nameList[i].size(); k++) {
+            temp += nameList[i][k] - 64;
+        }
+        SUM += temp * (i + 1);
     }
+
+    cout << "Answer: " << SUM << endl;
+    cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
     return 0;
 };
