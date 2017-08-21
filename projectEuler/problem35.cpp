@@ -50,7 +50,6 @@ for (i = 3; i < MAX; i += 2) {
 	if ( !primeSieve[i] ) {
 		int number = i;
 		int size = length(number);
-		cout << i << " " << size << " ";
 		bool isPrime = true;
 		for (int k = 0; k < size - 1; k++) {
 			cycle(number, size);

@@ -36,11 +36,7 @@ for (int D = 3; D < 1000; D++) {
 		maxD = D;
 		maxX = x;
 	}
-	cout << x << " " << D << " * " <<  (x * x - 1) / D << endl;
 }
 
 
 }
-
-
-

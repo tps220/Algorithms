@@ -27,7 +27,7 @@ int main() {
     //initializes 20 values to zero (this is for all the factors, which are represented by the index
     //of the vector
     factorMap.assign(20, 0);
-    
+
     for (int i = 2; i <= 20; i++) {
         int number = i;
         for (int j = 2; j <= i; j++) {

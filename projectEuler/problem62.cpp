@@ -48,16 +48,13 @@ map<string, data> perms;
 int result = 0;
 for (int i = 200; i < 10000; i++) {
 	long long curr = cube(i);
-	cout << curr << " ";
 	string number = tostring(curr);
 	sort(number);
-	cout << number << endl;
 	if (perms.find(number) == perms.end()) {
 		perms.insert(pair<string, data>(number, data(i)));	
 	}
 	else {
 		perms[number].count++;
-		cout << number << endl;
 		if (perms[number].count == 5) {
 			result = perms[number].firstNumber;
 			break;

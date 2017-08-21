@@ -3,7 +3,7 @@
 #include <time.h>
 using namespace std;
 
-//The normal algorithm for modular exponentaiton goes beyond the max limit of 
+//The normal algorithm for modular exponentaiton goes beyond the max limit of
 //unsigned long long, so we must perform a much much slower calculation of O(n)
 //rather than O(logn). This is very sad. The way to fix this would to make our
 //own implementaiton of BigInteger class, something that will greatly improve

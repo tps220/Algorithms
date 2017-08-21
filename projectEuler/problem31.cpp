@@ -72,17 +72,17 @@ for (int column = 2; column < 9; column++) {
 }
 
 //Display map to show what it looks like
-for (int i = 0; i < 201; i++) {
-	for (int j = 0; j < 9; j++) {
-		cout << map[i][j] << "\t";
-	}
-	cout << endl;
-}
+//for (int i = 0; i < 201; i++) {
+//	for (int j = 0; j < 9; j++) {
+//		cout << map[i][j] << "\t";
+//	}
+//	cout << endl;
+//}
 
 
 
-cout << endl << endl << "Answer: " << map[200][8] << endl;
-cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl << endl;
+//cout << endl << endl << "Answer: " << map[200][8] << endl;
+//cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl << endl;
 
 //This process can be done faster and with less memory
 //if we are not so redundant in copying over the values from column to 

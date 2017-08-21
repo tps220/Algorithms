@@ -41,7 +41,7 @@ for (long i = 11; i < MAX; i++) {
 		}
 	}
 	if (SUM == i) {
-		addingUp += SUM;	
+		addingUp += SUM;
 	}
 }
 

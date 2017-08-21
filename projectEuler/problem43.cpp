@@ -101,7 +101,6 @@ for (int a = 1024; a < 9876; a += 2) {
 						//If number is pandigital, add to sum
 						if ( pandigital(number) ) {
 							result += number;
-							cout << number << endl;
 						}
 						}
 					}

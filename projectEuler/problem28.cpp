@@ -26,7 +26,7 @@ while (spiralCounter <= 1001) {
 	column++;
 	for (i = 0; i < spiralCounter - 1; i++) {
 		board[row][column] = numberCounter;
-		row++;		
+		row++;
 		numberCounter++;
 	}
 	row--;
@@ -49,10 +49,11 @@ while (spiralCounter <= 1001) {
 }
 
 
+
 long SUM = -1;
 for (int i = 0, j1 = 0, j2 = 1000; i < 1001; i++, j1++, j2--) {
 		SUM += board[i][j1] + board[i][j2];
-}		
+}
 for (int i = 0; i < 1001; i++) {
 	delete [] board[i];
 }

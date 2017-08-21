@@ -13,7 +13,7 @@ using namespace std;
 //What values of a and b make n increase... essentially which numbers produce more primes. And just in general,
 //are there any other patterns?
 //
-//(1) Well first, since n * n + a * n + b must equal a prime number, when we plug in 0 for n, we 
+//(1) Well first, since n * n + a * n + b must equal a prime number, when we plug in 0 for n, we
 //get in the most literal equation,  b must equal a prime number. So yeah,  b = prime number.
 //Therefore, implementing a prime sieve to first check whether b is prime, and then determine whether
 //the function produces a prime seems like the most effective approach. To minimize memory and maximize speed,
@@ -30,7 +30,7 @@ using namespace std;
 //      same exact behavior as g(n), except all the unused negative numbers for g(n) that produced those unused primes become a part of the sequence.
 //      As a result, they can now be used for solving when n > 0, what is the longest sequence of prime numbers the function can produce.
 //      This doubles the answer from 40 to 80.
-//      So, wWhat actually happens is that the numbers start high, go lower and lower, and then 
+//      So, wWhat actually happens is that the numbers start high, go lower and lower, and then
 //      finally go upwards. And most importantly, the function only touches 40 unique primes.
 //
 //	How do we use this?
@@ -41,7 +41,7 @@ using namespace std;
 //      of our graph.
 //
 //
-//Soooooooo, after these realizations I bounded a and b differently. 
+//Soooooooo, after these realizations I bounded a and b differently.
 //According to my observations, B had to be positive.
 //For one, b has to be prime as proven. And secondly if you don't believe that, in order for the slope be negative
 //and the resulting graph / prime number be positive, b has to translate the graph upwards above the x-axis. So, limit b to greater than 1.
@@ -63,7 +63,7 @@ for (int i = 2; i < 999; i++) {
 		for (int j = i * 2; j < 1000000; j+= i) {
 			array[j] = true;
 		}
-	}	
+	}
 }
 
 

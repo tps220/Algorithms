@@ -17,7 +17,7 @@ int gcd(int a, int c) {
 //To be primitive, gcd of a and c == 1
 //
 //
-//Use a "pythagorean sieve" to store all the 
+//Use a "pythagorean sieve" to store all the
 //possible primitive combinations and their
 //multiples
 int main() {
@@ -31,10 +31,10 @@ for (int n = 1; n < 50; n++ ) {
 		int a = m * m - n * n;
 		int b = 2 * m * n;
 		int c = m * m + n * n;
-	
+
 		if (gcd(a, c) == 1) {
 			int sum = a + b + c;
-			for (int k = sum; k <= 1000; k += sum) {	
+			for (int k = sum; k <= 1000; k += sum) {
 				pythagor[k]++;
 				if (pythagor[k] > MAX) {
 					MAX = pythagor[k];

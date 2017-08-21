@@ -73,7 +73,7 @@ int main() {
     vector<string> nameList;
     nameList.push_back("");
 
-    ifstream file("/Users/tsalemy/Desktop/Debug/en.lproj/problem22.txt");
+    ifstream file("problem22.txt");
     if ( file.is_open() ) {
         int count = 0;
         char ch;

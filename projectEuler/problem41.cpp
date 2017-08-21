@@ -63,7 +63,7 @@ bool isPrime(long num) {
 		}
 	}
 	return true;
-}	
+}
 
 
 bool pandigital(long num) {
@@ -92,12 +92,12 @@ int main() {
 	//4 pandigital = 10
 	//3 pandigital = 6
 	//2 pandigital = 3
-	
+
 	//I decided to use the miller rabin primality test because the problem
 	//only requires to check, i would assume, not that many primes because
-	//pandigital numbers are not a frequent occurence. 
-	
-	clock_t time = clock();	
+	//pandigital numbers are not a frequent occurence.
+
+	clock_t time = clock();
 
 	long result = 0;
 	for (long i = 7654321; i > 0; i -= 2) {
@@ -107,13 +107,7 @@ int main() {
 				break;
 			}
 		}
-	}					
+	}
 	cout << "Answer: " << result << endl;
 	cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
 }
-
-
-
-
-
-	
