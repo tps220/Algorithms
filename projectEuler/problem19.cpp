@@ -1,3 +1,8 @@
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 19: Counting Sundays
+//Question: How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+
 #include <iostream>
 #include <time.h>
 using namespace std;
@@ -11,17 +16,18 @@ void isSunday(int *day, int* sundays) {
 
 int main() {
 
-clock_t time = clock();
-int day = 0;
-//Account for year 1900 having two sundays that fit the requirements
-int sundays = -2;
-int year = 1900;
-int month = 0;
-int *ptrSunday = &sundays;
-int *ptrDay = &day;
+    clock_t time = clock();
+    int day = 0;
+    
+    //Account for year 1900 having two sundays that fit the requirements
+    int sundays = -2;
+    int year = 1900;
+    int month = 0;
+    int *ptrSunday = &sundays;
+    int *ptrDay = &day;
 
-while (year <= 2000) {
-	switch(month) {
+    while (year <= 2000) {
+	    switch(month) {
 		//January
 		case 0:
 			isSunday(ptrDay, ptrSunday);
@@ -91,13 +97,13 @@ while (year <= 2000) {
 			day += 31;
 			day %= 7;
 			break;
-	}
+	    }
 	year++;
-}
+    }
 
-cout << "Answer: " << sundays << endl;
-cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
+    cout << "Answer: " << sundays << endl;
+    cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
 
-return 1;
+    return 1;
 
 };

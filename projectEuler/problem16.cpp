@@ -1,44 +1,51 @@
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 16: Power digit sum
+//Question: What is the sum of the digits of the number 2^1000?
+
 #include <iostream>
 #include <vector>
 #include <time.h>
 using namespace std;
 
 
+//Use a dynamically sized array to represent each digit
 int main() {
 
-clock_t time = clock();
-vector<int> integerMap;
+    clock_t time = clock();
+    vector<int> integerMap;
 
-//Estimate of how large the number will be
-integerMap.reserve(350);
+    //Estimate of how large the number will be
+    integerMap.reserve(350);
 
-//Initialize first number to 1 :)
-integerMap.push_back(1);
+    //Initialize first number to 1 :)
+    integerMap.push_back(1);
 
-for (int i = 1; i <= 1000; i++) {
-	for (int j = 0; j < integerMap.size(); j++) {
-		integerMap[j] *= 2;
-		while (integerMap[j] >= 10) {
-			if (j < integerMap.size() - 1) {
-				integerMap[j + 1] = integerMap[j + 1] * 2 + 1;
-			}
-			else {
-				integerMap.push_back(1);
-			}
-			integerMap[j] -= 10;
-			j++;
-		}
-	}
-};
+    for (int i = 1; i <= 1000; i++) {
+	    for (int j = 0; j < integerMap.size(); j++) {
+		    integerMap[j] *= 2;
+		    while (integerMap[j] >= 10) {
+			    if (j < integerMap.size() - 1) {
+				    integerMap[j + 1] = integerMap[j + 1] * 2 + 1;
+			    }
+			    else {
+				    integerMap.push_back(1);
+			    }
+			    integerMap[j] -= 10;
+			    j++;
+		    }
+	    }
+    };
 
 
-//Calculate Sum
-int sum = 0;
-for (int i = 0; i < integerMap.size(); i++) {
-	sum += integerMap[i];
-}
-cout << "Answer: " << sum << endl;
-cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
+    //Calculate Sum
+    int sum = 0;
+    for (int i = 0; i < integerMap.size(); i++) {
+	    sum += integerMap[i];
+    }
+
+    cout << "Answer: " << sum << endl;
+    cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
 
 };
 	
