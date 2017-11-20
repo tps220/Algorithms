@@ -1,3 +1,9 @@
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 41: Pandigital Prime
+//Question: What is the largest n-digit pandigital prime that exists?
+
+
 #include <iostream>
 #include <time.h>
 #include  <stdlib.h>
@@ -5,7 +11,7 @@
 #include <sstream>
 using namespace std;
 
-
+//Implementation of the miller-rabin primality test
 long modularExponentation(long a, long d, long num) {
 	int result = 1;
 	while (d > 0) {
@@ -80,26 +86,28 @@ bool pandigital(long num) {
 	return true;
 }
 
+//Some optimizations for the main method:
+//A number is divisible by 3 if its digits' sum is divisible by 3
+//If a number is 1 to n pandigital, that means we know the sum of its digits.
+//9 pandigital = sum from 1 to 9 = n * (n + 1) / 2 = 9 * (9 + 1) / 2 = 45 --> divisible by 3;
+//8 pandigital = 36 --> divisible by 3
+//7 pandigital = 28 --> not divisible by 3, so has the possibility to be prime
+//6 pandigital = 21 --> divisible by 3
+//5 pandigital = 15 --> divisible by 3
+//4 pandigital = 10 --> not divisible by 3 so has the possibility to be prime
+//3 pandigital = 6 --> divisibly by 3
+//2 pandigital = 3 --> divisible by 3
+
+//I decided to use the miller rabin primality test because the problem
+//only requires to check, i would assume, not that many primes because
+//pandigital numbers are not a frequent occurence.
+
 int main() {
-	//A number is divisible by 3 if its digits' sum is divisible by 3
-	//
-	//If a number is 1 to n pandigital, that means we know the sum of its digits.
-	//9 pandigital = sum from 1 to 9 = n * (n + 1) / 2 = 9 * (9 + 1) / 2 = 45;
-	//8 pandigital = 36
-	//7 pandigital = 28 --> not divisible by 3, so has the possibility to be prime
-	//6 pandigital = 21
-	//5 pandigital = 15
-	//4 pandigital = 10
-	//3 pandigital = 6
-	//2 pandigital = 3
-
-	//I decided to use the miller rabin primality test because the problem
-	//only requires to check, i would assume, not that many primes because
-	//pandigital numbers are not a frequent occurence.
-
 	clock_t time = clock();
 
 	long result = 0;
+    //Start at the largest pandigital, iterate down
+    //and only through the odd numbers
 	for (long i = 7654321; i > 0; i -= 2) {
 		if (pandigital(i)) {
 			if (isPrime(i)) {
@@ -110,4 +118,5 @@ int main() {
 	}
 	cout << "Answer: " << result << endl;
 	cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
+    return 0;
 }

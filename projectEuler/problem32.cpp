@@ -1,3 +1,9 @@
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 32: Pandigital Products
+//Find the sum of all products whose product identity
+//can be written as a 1 through 9 pandigital
+
 #include <iostream>
 #include "time.h"
 #include <sstream>
@@ -42,7 +48,7 @@ int main() {
 	    else {
 		    j = 1000;
 	    }
-	    while ( i * j < 9999) {
+	    while (i * j < 9999) {
 		    if (pandigital(i, j, i * j)) {
 			    if (duplicates.find(i * j) == duplicates.end()) {	
 				    SUM += i * j;
@@ -55,5 +61,4 @@ int main() {
     }
     cout << "Answer: " << SUM << endl;
     cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
-
 }
