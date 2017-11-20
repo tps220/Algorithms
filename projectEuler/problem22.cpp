@@ -1,3 +1,9 @@
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 22: Names Scores
+//Question: 46k text file with over 5000 first names, 
+//What is the total of all the name scores in the file?
+
 #include <iostream>
 #include <time.h>
 #include <fstream>
@@ -61,36 +67,35 @@ void mergeSort(vector<string> &map, int lower, int higher) {
 };
 
 
-
-
-
-
 int main() {
 
     clock_t time = clock();
 
-
     vector<string> nameList;
     nameList.push_back("");
 
+    //Get Names
     ifstream file("problem22.txt");
-    if ( file.is_open() ) {
-        int count = 0;
-        char ch;
-        while (file >> ch) {
-            if (ch == 44) {
-                count++;
-                nameList.push_back("");
-            }
-            else if (ch != 34) {
-                nameList[count] += ch;
-            }
+    if (!file.is_open()) {
+        cerr << "Could not open file" << endl;
+        return -1;
+    }
+    int count = 0;
+    char ch;
+    while (file >> ch) {
+        if (ch == 44) {
+            count++;
+            nameList.push_back("");
         }
-        mergeSort(nameList, 0, (int)nameList.size() - 1);
+        else if (ch != 34) {
+            nameList[count] += ch;
+        }
     }
-    else {
-        cout << "File not found" << endl;
-    }
+    
+    //Sort the names efficiently with merge sort
+    mergeSort(nameList, 0, (int)nameList.size() - 1);
+    
+    //Finally compute the sum with the given rules
     long long SUM = 0;
     for (int i = 0; i < nameList.size(); i++) {
         int temp = 0;

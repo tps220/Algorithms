@@ -8,11 +8,11 @@
 
 using namespace std;
 
-//The worst thing you can do is try to count each path in the 20 x 20 grid with your program.
-//That would take ages on ages.
+//The inefficient approach is try to count each path in the 20 x 20 grid with your program.
+//That would take ages. So let's try to think of another way
 
-//So, I first ask you to look at the grid and think... how can I store my solution for 
-//every path I took previously?
+//So, I first ask you to look at the grid and think... how can I store a solution for 
+//the number of paths I took previously, and step by step build onto that until I reach an end condition?
 
 //Use a grid, with each box representing the number of paths that go through that box.
 //After reaching the bottom right box, it will represent the total number of possible paths to

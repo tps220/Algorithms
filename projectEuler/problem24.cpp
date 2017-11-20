@@ -1,5 +1,8 @@
-//Lexicographic Permutations Baby
-//
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 24: Lexicographic Permutations
+//Question: What is the millionth lexicographic permutation of the digits 
+//0, 1, 2, 3, 4, 5, 6, 7, 8 and 9
 
 #include <iostream>
 #include <time.h>
@@ -14,7 +17,7 @@ int factorial(int n) {
 	if (n == 1) {
 		return 1;
 	}
-	while (n != 1) {
+	if (n != 1) {
 		return n * factorial(n - 1);
 	}
 	return 1;
@@ -23,39 +26,38 @@ int factorial(int n) {
 
 int main() {
 
-clock_t time = clock();
+    clock_t time = clock();
 
-//Initialize map of numbers that can be dynamically removed
-vector<int> numberMap;
-for (int i = 0; i < 10; i++) {
-	numberMap.push_back(i);
-}
+    //Initialize map of numbers that can be dynamically removed
+    vector<int> numberMap;
+    for (int i = 0; i < 10; i++) {
+	    numberMap.push_back(i);
+    }
 
-//Original Lexicographic Placement
-int LEXO = 1000000;
+    //Original Lexicographic Placement
+    int LEXO = 1000000;
 
-//Algorithm
+    //Algorithm
+    int scale = 9;
+    int subtractor;
+    int count;
+    while (scale >= 0) {
+	    subtractor = factorial(scale);
+	    count = 0;
+	    while (LEXO > subtractor) {
+		    LEXO -= subtractor;
+		    count++;
+	    }
+	    numberMap.push_back(numberMap[count]);
+	    numberMap.erase(numberMap.begin() + count);
+	    scale--;
+    }
 
-int scale = 9;
-int subtractor;
-int count;
-while (scale >= 0) {
-	subtractor = factorial(scale);
-	count = 0;
-	while (LEXO > subtractor) {
-		LEXO -= subtractor;
-		count++;
-	}
-	numberMap.push_back(numberMap[count]);
-	numberMap.erase(numberMap.begin() + count);
-	scale--;
-}
 
-
-//Print Final Answer + Time
-cout << "Answer: ";
-for (int i = 0; i < numberMap.size(); i++) {
-	cout << numberMap[i];
-}
-cout << endl << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
+    //Print Final Answer + Time
+    cout << "Answer: ";
+    for (int i = 0; i < numberMap.size(); i++) {
+	    cout << numberMap[i];
+    }
+    cout << endl << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
 };
