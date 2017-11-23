@@ -5,8 +5,8 @@
 using namespace std;
 
 
+//Next three methods implement the miller-rabin primality test
 long long modularExponentation(long long a, long long &num, long long d) {
-
 	long long result = 1;
 	a = a % num;
 	while ( d != 0) {
@@ -23,7 +23,6 @@ long long modularExponentation(long long a, long long &num, long long d) {
 
 
 bool millerRabinTest(long long &num, long long d) {
-
 	long long a = rand() % (num - 4) + 2;
 	long long x = modularExponentation(a, num, d);
 
@@ -46,18 +45,17 @@ bool millerRabinTest(long long &num, long long d) {
 
 
 
-//We know first diagonal will be 3, so don't have to deal with corner cases below 3
+//First diagonal will be 3, so don't have to deal with
+//normal corner cases for numbers below 3
 bool isPrime(long long &num) {
 	if (num % 2 == 0) {
 		return false;
-	}
-	
+	}	
 	//Begin 4 iterations of miller rabin test
 	long long d = num - 1;
 	while (d % 2 == 0) {
 		d /= 2;
 	}
-	
 	for (int i = 0; i < 4; i++) {
 		if (!millerRabinTest(num, d)) {
 			return false;
@@ -70,30 +68,28 @@ bool isPrime(long long &num) {
 
 
 int main() {
+    clock_t time = clock();
+    
+    long long number = 1; //current value to be added to the map
+    int sideLength = 1; //length of the current side
+    int primeCount = 0; //number of primes found
+    int diagonalCount = 1;
+    int percentage = 100; //percentage of primes / totalDiagonalNumbers
 
-clock_t time = clock();
-long long number = 1; //current value to be added to the map
-int sideLength = 1; //length of the current side
-int primeCount = 0; //number of primes found
-int diagonalCount = 1;
-int percentage = 100; //percentage of primes / totalDiagonalNumbers
+    while (percentage >= 10) {
+	    sideLength += 2;
+	    for (int i = 0; i < 4; i++) {
+		    number += sideLength - 1;
+		    if (isPrime(number)) {
+			    primeCount++;
+		    }
+		    diagonalCount++;
+	    }
+	    percentage = primeCount * 100 / diagonalCount;
+    }
 
-while (percentage >= 10) {
-	sideLength += 2;
-	for (int i = 0; i < 4; i++) {
-		number += sideLength - 1;
-		if ( isPrime(number) ) {
-			primeCount++;
-		}
-		diagonalCount++;
-	}
-	percentage = primeCount * 100 / diagonalCount;
-}
-
-cout << "SideLength: " << sideLength << ", last diagonal was: " << number << endl;
-cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
-
-
-
+    cout << "SideLength: " << sideLength << ", last diagonal was: " << number << endl;
+    cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
+    return 0;
 
 }

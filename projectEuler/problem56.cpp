@@ -1,9 +1,15 @@
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 56
+
 #include <iostream>
 #include <time.h>
 #include <vector>
 using namespace std;
 
 
+//Find the digits through an array, and then
+//add up the sum of the digits in that array
 int findSum(int& a, int b) {
 	vector<int> digits;
 	digits.push_back(a);
@@ -33,21 +39,19 @@ int findSum(int& a, int b) {
 }
 
 int main() {
+    clock_t time = clock();
 
+    int MAX = 1;
+    for (int a = 11; a < 100; a++) {
+	    for (int b = 11; b < 101; b++) {
+		    int sum = findSum(a, b);	
+		    if (sum > MAX) {
+			    MAX = sum;
+		    }
+	    }
+    }
 
-clock_t time = clock();
-
-int MAX = 1;
-for (int a = 11; a < 100; a++) {
-	for (int b = 11; b < 101; b++) {
-		int sum = findSum(a, b);	
-		if (sum > MAX) {
-			MAX = sum;
-		}
-	}
-}
-
-cout << "Answer: " << MAX << endl;
-cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
-
+    cout << "Answer: " << MAX << endl;
+    cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
+    return 0;
 }

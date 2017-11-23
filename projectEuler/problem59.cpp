@@ -1,3 +1,7 @@
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 59
+
 #include <iostream>
 #include <time.h>
 #include <fstream>
@@ -26,17 +30,21 @@ int frequencyAnalysis(vector<int>& chars, int& start) {
 }
 
 int main() {
+    clock_t time = clock();
 
-clock_t time = clock();
+    ifstream file("problem59.txt");
+    if (!file.is_open()) {
+        cerr << "Could not open file" << endl;
+        return -1;
+    }
 
-long SUM = 0;
-ifstream file("problem59.txt");
-if (file.is_open()) {
+    long SUM = 0;
 	vector<int> chars;
 	char ch;
 	int counter = 0;
 	int index = 0;
-	while (file >> ch) {
+	//Handle input from file
+    while (file >> ch) {
 		if (ch == ',') {
 			if (counter == 1) {
 				chars[index] /= 10;
@@ -53,6 +61,7 @@ if (file.is_open()) {
 			counter++;
 		}
 	}
+
 	int* key = new int[3];
 	for (int i = 0; i < 3; i++) {
 		int curr = frequencyAnalysis(chars, i);
@@ -63,11 +72,8 @@ if (file.is_open()) {
 		SUM += chars[i];
 	}
 	delete [] key;
-} else {
-	cout << "File could not open" << endl;
-	return 1;
-}
-cout <<  SUM << endl;
-cout << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
-return 0;
+    
+    cout <<  SUM << endl;
+    cout << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
+    return 0;
 }

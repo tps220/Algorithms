@@ -1,3 +1,9 @@
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 60
+
+//Note to me: NEEDS OPTIMIZATION
+
 #include <iostream>
 #include <time.h>
 #include <vector>
@@ -5,7 +11,7 @@
 using namespace std;
 
 
-
+//Next three methods implement miller-rabin primality test
 long modularExponentation(long a, long num, long d) {
 	long result = 1;
 	a = a % num;
@@ -69,81 +75,74 @@ int size(long num) {
 }
 
 bool pairPrime(long a, long b) {
-	if ( isPrime(a + size(a) * b) && isPrime(size(b) * a + b) ) {
-		return true;
-	}
-	return false;
+	return isPrime(a + size(a) * b) && isPrime(size(b) * a + b);
 }
-
-
 
 
 int main() {
 
-clock_t time = clock();
+    clock_t time = clock();
 
-//---------Prime Sieve for numbers below 100000 and a vector list of those numbers-------//
-const int MAX = 100000;
-const int BOUND = 334;
-bool primeSieve[MAX] = { false };
-vector<int> primes;
+    //Implement a prime sieve and store
+    //resulting primes in a vector
+    const int MAX = 100000;
+    const int BOUND = 334;
+    bool *primeSieve = new bool[MAX]();
+    vector<int> primes;
 
-//Deal with even numbers
-int i = 4;
-while (i < MAX) {
-	primeSieve[i] = true;
-	i += 2;
-}
+    //Deal with even numbers
+    int i = 4;
+    while (i < MAX) {
+	    primeSieve[i] = true;
+	    i += 2;
+    }
 
-for (i = 3; i < MAX; i += 2) {
-	if ( !primeSieve[i] ) {
-		primes.push_back(i);
-		if (i < BOUND) {
-			for (int k = i * 2; k < MAX; k += i) {
-				primeSieve[k] = true;
-			}
-		} 
-	}
-}
+    for (i = 3; i < MAX; i += 2) {
+	    if ( !primeSieve[i] ) {
+		    primes.push_back(i);
+		    if (i < BOUND) {
+			    for (int k = i * 2; k < MAX; k += i) {
+				    primeSieve[k] = true;
+			    }
+		    }    
+	    }
+    }
 
-bool flag = false;
-long a, b, c, d, e;
-long a2, b2, c2, d2, e2;
-for (int a1 = 0; a1 < 100; a1++) {
-	a = primes[a1];
-	for (int b1 = a1 + 1; b1 < 2000; b1++) {
-		b = primes[b1];
-		while (b1 < 3000 && !pairPrime(a, b)) {
-			b = primes[b1];
-			b1++;
-		}
-		for (int c1 = b1 + 1; c1 < 3000; c1++) {
-			c = primes[c1];
-			while (c1 < 3000 && (!pairPrime(a, c) || !pairPrime(b, c)) ) {
-				c = primes[c1];
-				c1++;
-			}
-			for (int d1 = c1 + 1; d1 < 3000; d1++) {
-				d = primes[d1];
-				while (d1 < 3000 && (!pairPrime(a, d) || !pairPrime(b, d) || !pairPrime(c, d)) ) {
-					d = primes[d1];
-					d1++;
-				}
-				for (int e1 = d1 + 1; e1 < 3000; e1++) {
-					e = primes[e1];
-					
-					if (pairPrime(a, e) && pairPrime(b, e) && pairPrime(c, e) && pairPrime(d, e)) {
-						
-			cout << a << " + " << b << " + " << c << " + " << d << " + " << e << " = " << a + b + c + d + e << endl;
+    bool flag = false;
+    long a, b, c, d, e;
+    long a2, b2, c2, d2, e2;
+    for (int a1 = 0; a1 < 100; a1++) {
+	    a = primes[a1];
+	    for (int b1 = a1 + 1; b1 < 2000; b1++) {
+		    b = primes[b1];
+		    while (b1 < 3000 && !pairPrime(a, b)) {
+			    b = primes[b1];
+			    b1++;
+		    }
+		    for (int c1 = b1 + 1; c1 < 3000; c1++) {
+			    c = primes[c1];
+			    while (c1 < 3000 && (!pairPrime(a, c) || !pairPrime(b, c)) ) {
+				    c = primes[c1];
+				    c1++;
+			    }
+			    for (int d1 = c1 + 1; d1 < 3000; d1++) {
+				    d = primes[d1];
+				    while (d1 < 3000 && (!pairPrime(a, d) || !pairPrime(b, d) || !pairPrime(c, d)) ) {
+					    d = primes[d1];
+					    d1++;
+				    }
+				    for (int e1 = d1 + 1; e1 < 3000; e1++) {
+					    e = primes[e1];	
+					    if (pairPrime(a, e) && pairPrime(b, e) && pairPrime(c, e) && pairPrime(d, e)) {
+			                cout << a << " + " << b << " + " << c << " + " << d << " + " << e << " = " << a + b + c + d + e << endl;
+					    }
+				    }
+			    }
+		    }
+	    }	
+    }
 
-					}
-				}
-			}
-		}
-	}
-	
-}
-
-cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
-
+    cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
+    delete [] primeSieve;
+    return 0;
 }
