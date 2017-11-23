@@ -1,12 +1,13 @@
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 62
+
 #include <iostream>
 #include <time.h>
 #include <sstream>
 #include <string>
 #include <map>
 using namespace std;
-
-
-//Implement a heap sort for improvement
 
 
 struct data {
@@ -35,36 +36,31 @@ void sort(string& num) {
 	}
 }
 
-long long cube(int num) {
-	return (long long)num * num * num;
-}
+    long long cube(int num) {
+	    return (long long)num * num * num;
+    }
 
 int main() {
+    clock_t time = clock();
 
-clock_t time = clock();
-
-//Store the permutations
-map<string, data> perms;
-int result = 0;
-for (int i = 200; i < 10000; i++) {
-	long long curr = cube(i);
-	string number = tostring(curr);
-	sort(number);
-	if (perms.find(number) == perms.end()) {
-		perms.insert(pair<string, data>(number, data(i)));	
-	}
-	else {
-		perms[number].count++;
-		if (perms[number].count == 5) {
-			result = perms[number].firstNumber;
-			break;
-		}		
-	}
-}
-
-cout << result << ": " << (long)result * result * result << endl;
-cout << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
-
-
-
+    //Store the permutations
+    map<string, data> perms;
+    int result = 0;
+    for (int i = 200; i < 10000; i++) {
+	    long long curr = cube(i);
+	    string number = tostring(curr);
+	    sort(number);
+	    if (perms.find(number) == perms.end()) {
+		    perms.insert(pair<string, data>(number, data(i)));	
+	    }
+	    else {
+		    perms[number].count++;
+		    if (perms[number].count == 5) {
+			    result = perms[number].firstNumber;
+			    break;
+	    	}	    	
+    	}
+    }
+    cout << result << ": " << (long)result * result * result << endl;
+    cout << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
 }

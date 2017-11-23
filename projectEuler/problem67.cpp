@@ -1,3 +1,7 @@
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 67
+
 #include <iostream>
 #include <time.h>
 #include <vector>
@@ -7,13 +11,18 @@ using namespace std;
 
 
 int main() {
+    clock_t time = clock();
 
-clock_t time = clock();
-vector<int> board;
+    ifstream file("problem67.txt");
+    if (!file.is_open()) {
+        cerr << "Could not open file" << endl;
+        return -1;
+    }
 
-ifstream file("problem67.txt");
-if ( file.is_open() ) {
-	int count = 0;
+    vector<int> board;
+	
+    //Handle input
+    int count = 0;
 	char ch;
 	while (file >> ch) {
 		if (count % 2 == 0) {
@@ -24,21 +33,19 @@ if ( file.is_open() ) {
 		}
 		count++;
 	}
-	//Reverse engineered formula of n * (n + 1) / 2 for triangular numbers to find
+
+	//Reverse engineer triangular number formula, n * (n + 1) / 2, to find
 	//the height of the triangle
 	const int height = (sqrt(8 * board.size() + 1) - 1) / 2;
 	
 	//Deal with corner cases (first column and last column only have one path possible)
 	for (int i = 1; i < height; i++) {
-
 		//starting column represents the triangular number based upon current height
 		board[i * (i + 1) / 2] += board[(i - 1) * i / 2];
-
-		//ending column, can be calculated in a couple ways.... I did it as
+		//ending column, can be calculated in a few ways, one way is:
 		//starting column + current height
 		board[i * (i + 1) / 2 + i] += board[(i - 1) * i / 2 + i - 1]; 
 	}
-
 
 	for (int i = 1; i < height - 1; i++) {
 		for (int k = i * (i + 1) / 2; k < (i + 1) * (i + 2) / 2 - 1; k++) {
@@ -57,12 +64,8 @@ if ( file.is_open() ) {
 			MAX = board[i];
 		}
 	}
+
 	cout << MAX << endl;
 	cout << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
-}
-
-else {
-	cout << "File could not be opened" << endl;
-}
-
+    return 0;
 }

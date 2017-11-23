@@ -1,19 +1,24 @@
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 99
 #include <iostream>
 #include <time.h>
 #include <math.h>
 #include <fstream>
 using namespace std;
 
-
 int main() {
+    clock_t time = clock();
 
-clock_t time = clock();
+    ifstream file("problem99.txt");
+    if (!file.is_open()) {
+        cerr << "Could not open file" << endl;
+        return -1;
+    }
+    int maxLine = 0;
+    double MAX = 0;
 
-ifstream file("problem99.txt");
-int maxLine = 0;
-double MAX = 0;
-if (file.is_open()) {
-	int base;
+    int base;
 	char comma;
 	int exponent;
 	int lineNumber = 1;
@@ -25,9 +30,8 @@ if (file.is_open()) {
 		}
 		lineNumber++;
 	}
-}
 
-cout << maxLine << endl;
-cout << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
-
+    cout << maxLine << endl;
+    cout << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
+    return 0;
 }

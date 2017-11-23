@@ -1,11 +1,13 @@
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 92
+
+
 #include <iostream>
 #include <time.h>
 #include <vector>
 using namespace std;
 
-
-//Can use a combinatorics method or
-//just this solution
 
 int sumOfDigitsSquared(long num) {
 	if (num == 0) {
@@ -15,41 +17,43 @@ int sumOfDigitsSquared(long num) {
 	return digit * digit + sumOfDigitsSquared(num / 10);
 }
 
+//Can use a combinatorics method by hand or
+//the following solution
 int main() {
+    clock_t time = clock();
 
-clock_t time = clock();
+    //9 * 9 = max square, 7 = max length of digits
+    const int bound = (9*9)*7 + 1; 
+    const int MAX = 10000000;
+    int *map = new int[bound]();
+    int count = 0;
 
-const int bound = (9*9)*7 + 1; //9 * 9 = max square, 7 = max length of digits
-const int MAX = 10000000;
-int map[bound] = {0};
-int count = 0;
+    for (long i = 1; i < MAX; i++) {
+	    int currNumber = sumOfDigitsSquared(i);
+	    int firstNumber = currNumber;
+	    for (;;) {
+		    if (currNumber == 1) {
+			    map[firstNumber] = 1;
+			    break;
+		    }
+		    else if (currNumber == 89) {
+			    map[firstNumber] = 2;
+			    count++;
+			    break;
+		    }
+		    else if (map[currNumber] == 2) {
+			    count++;
+			    break;
+		    }
+		    else if (map[currNumber] == 1) {
+			    break;
+		    }
+		    currNumber = sumOfDigitsSquared(currNumber);
+	    }
+    }
 
-for (long i = 1; i < MAX; i++) {
-	int currNumber = sumOfDigitsSquared(i);
-	int firstNumber = currNumber;
-	for (;;) {
-		if (currNumber == 1) {
-			map[firstNumber] = 1;
-			break;
-			
-		}
-		else if (currNumber == 89) {
-			map[firstNumber] = 2;
-			count++;
-			break;
-		}
-		else if (map[currNumber] == 2) {
-			count++;
-			break;
-		}
-		else if (map[currNumber] == 1) {
-			break;
-		}
-		currNumber = sumOfDigitsSquared(currNumber);
-	}
-}
+    cout << count << endl;
+    cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
 
-cout << count << endl;
-cout << "Time: " << (clock() - time) / (double) CLOCKS_PER_SEC << endl;
-
+    delete [] map;
 }

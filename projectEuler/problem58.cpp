@@ -1,3 +1,7 @@
+//Thomas Salemy
+//Project Euler Solutions
+//Problem 58
+
 #include <iostream>
 #include <time.h>
 #include <vector>

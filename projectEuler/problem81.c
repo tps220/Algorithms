@@ -42,10 +42,6 @@ int main(int argc, char** argv) {
     }
   }
 
-
-
-
-
   fprintf(stdout, "Answer: %d\n", matrix[SIZE - 1][SIZE - 1]);
   for (int i = 0; i < SIZE; i++) {
     free(matrix[i]);
