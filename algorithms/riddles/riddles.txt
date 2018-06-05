@@ -1,0 +1,5 @@
+A scientist is experimenting with bacteria that are one micron in diameter and that reproduce by dividing every minute into two bacteria. At 12:00 PM, she puts a single organism in a container. At precisely 1:00 PM, the container is full.
+
+A bear walks south for one kilometer, then it walks west for one kilometer, then it walks north for one kilometer and ends up at the same point from which it started. What color was the bear?
+
+Given eight queens on a standard 8 x 8 chessboard, how many unique positions-- exclusive of rotations and mirror images-- can those eight queens occupy without attacking each other?
