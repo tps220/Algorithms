@@ -244,5 +244,87 @@ void BinarySearchTree::connect_perfect_tree(Node* root, Node* ll) {
   return connect_perfect_tree(root -> left, root -> left);
 }
 
+void BinarySearchTree::connect_tree() {
+  if (root == NULL) {
+    return;
+  }
+  return connect_tree(root, root);
+}
+
+void BinarySearchTree::connect_tree(Node* last_join, Node* ll) {
+  //Base case, done linking
+  if (last_join == NULL) {
+    return;
+  }
+  //Need to find the next level branch
+  else if (ll == NULL) {
+    Node* link = NULL;
+    while (last_join) {
+      if (last_join -> left) {
+        link = last_join -> left;
+        break;
+      }
+      else if (last_join -> right) {
+        link = last_join -> right;
+        break;
+      }
+      last_join = last_join -> getNext();
+    }
+    return connect_tree(link, link);
+  }
+  //Condition 1: Left and Right Children Present
+  if (ll -> left && ll -> right) {
+    ll -> left -> setNext(ll -> right);
+    Node* runner = ll;
+    while (runner -> getNext()) {
+      if (runner -> getNext() -> left) {
+        ll -> right -> setNext(runner -> getNext() -> left);
+        break;
+      }
+      else if (runner -> getNext() -> right) {
+        ll -> right -> setNext(runner -> getNext() -> right);
+        break;
+      }
+      runner = runner -> getNext();
+    }
+    //if no nodes left to connect, set to null
+    if (runner -> getNext() == NULL) {
+      ll -> right -> setNext(NULL);
+    }
+    //return the next node with a child to be set
+    return connect_tree(last_join, runner -> getNext());
+  }
+  //Condition 2: Only Left or Right Child
+  Node* child;
+  if (ll -> left) {
+    child = ll -> left;
+  }
+  else if (ll -> right) {
+    child = ll -> right;
+  }
+  //or no children so go to the next node
+  else {
+    return connect_tree(last_join, ll -> getNext());
+  }
+  Node* runner = ll;
+  while (runner -> getNext()) {
+    if (runner -> getNext() -> left) {
+      child -> setNext(runner -> getNext() -> left);
+      break;
+    }
+    else if (runner -> getNext() -> right) {
+      child -> setNext(runner -> getNext() -> right);
+      break;
+    }
+    runner = runner -> getNext();
+  }
+  if (runner -> getNext() == NULL) {
+    child-> setNext(NULL);
+  }
+  return connect_tree(last_join, runner -> getNext());
+}
+
+
+
 
 #endif

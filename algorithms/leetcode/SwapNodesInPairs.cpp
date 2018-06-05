@@ -9,29 +9,35 @@ struct ListNode {
 
 class Solution {
 public:
-  ListNode* swapPairs(ListNode* root) {
-    if (root == NULL) {
-      return root;
+  ListNode* swapPairs(ListNode* head) {
+    if (head == NULL || head -> next == NULL) {
+      return head;
     }
-    else if (root -> next == NULL) {
-      return root;
-    }
-    ListNode* base = NULL;
-    ListNode* header = root;
-    ListNode* footer = root -> next;
-    while (footer != NULL) {
+    ListNode* header = head;
+    ListNode* footer = head -> next;
+    ListNode* old_duo = NULL;
+    while (header && footer) {
+      //1
       header -> next = footer -> next;
+      //2
       footer -> next = header;
-      if (base != NULL) {
-        base -> next = footer;
+      //3 Base case included
+      if (old_duo) {
+        old_duo -> next = footer;
       }
-      if (header -> next == NULL || header -> next -> next == NULL) {
-        return root;
+      else {
+        head = footer;
       }
-      base = header;
-      header = header -> next;
-      footer = header -> next -> next;
+      //4 The list now looks like old_duo -> footer -> header ->
+      if (header -> next && header -> next -> next) {
+        old_duo = header;
+        header = header -> next;
+        footer = header -> next;
+      }
+      else {
+        break;
+      }
     }
-    return root;
+    return head;
   }
 };

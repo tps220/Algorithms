@@ -22,6 +22,7 @@ public:
   bool hasPathSum(int sum);
   std::vector<std::vector<int>> levelOrder();
   void connect_perfect_tree();
+  void connect_tree();
 
 private:
   Node* root;
@@ -37,6 +38,7 @@ private:
   //Methods
   bool hasPathSum(Node* root, int target, int current_sum);
   void connect_perfect_tree(Node* root, Node* ll);
+  void connect_tree(Node* last_join, Node* ll);
 };
 
 #endif
