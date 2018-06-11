@@ -24,14 +24,15 @@ public:
             //Find the smallest number thats bigger than the target
             int target = nums[starting_index];
             int index = nums.size() - 1;
-            for (int i = starting_index + 1; i < nums.size() - 1; i++) {
-                if (nums[i] < target) {
-                    index = i - 1;
+            for (int i = nums.size() - 1; i > starting_index; i--) {
+                if (nums[i] > target) {
+                    index = i;
                     break;
                 }
             }
             swap(nums[index], nums[starting_index]);
-            mergeSort(nums, starting_index + 1, nums.size() -1); 
+            mergeSort(nums, starting_index + 1, nums.size() -1);
+            return;
         }
         //sort from beginning to end
         mergeSort(nums, 0, nums.size() - 1);
