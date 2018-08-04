@@ -98,7 +98,7 @@ int main(int argc, char** argv) {
     run_method.printList(base);
     base = run_method.sortList(base);
     run_method.printList(base);
-
+    //deal with memory leak later, currently just debugging
 }
 
 
