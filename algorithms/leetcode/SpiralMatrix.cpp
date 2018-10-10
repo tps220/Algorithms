@@ -5,50 +5,33 @@ using namespace std;
 class Solution {
 public:
     vector<int> spiralOrder(vector< vector<int> > &matrix) {
-        vector<int> answer;
         if (matrix.size() == 0) {
-            return answer;
+            return vector<int>();
         }
-        int i = 0, j = 0, horizontal = 1, vertical = 0;
-        int counter = 0, size = matrix.size() * matrix[0].size();
-        for(;;) {
-            if (counter == size) {
-                break;
+        vector<int> spiral;
+        int rowBegin = 0, colBegin = 0;
+        int rowEnd = (int)matrix.size() - 1;
+        int colEnd = (int)matrix[0].size() - 1;
+        while (rowBegin <= rowEnd && colBegin <= colEnd) {
+            for (int i = colBegin; i <= colEnd; i++) {
+                spiral.push_back(matrix[rowBegin][i]);
             }
-            //moving forward
-            if (horizontal == 1) {
-                if (j == matrix[i].size() - 1 || matrix[i][j + 1] == 0) {
-                    horizontal = 0;
-                    vertical = 1;
+            for (int i = rowBegin + 1; i <= rowEnd; i++) {
+                spiral.push_back(matrix[i][colEnd]);
+            }
+            if (rowBegin < rowEnd && colBegin < colEnd) {
+                for (int i = colEnd - 1; i > colBegin; i--) {
+                    spiral.push_back(matrix[rowEnd][i]);
+                }
+                for (int i = rowEnd; i > rowBegin; i--) {
+                    spiral.push_back(matrix[i][colBegin]);
                 }
             }
-            //moving backward
-            else if (horizontal == -1) {
-                if (j == 0 || matrix[i][j - 1] == 0) {
-                    horizontal = 0;
-                    vertical = -1;
-                }
-            }
-            //moving downwards
-            else if (vertical == 1) {
-                if (i == matrix.size() - 1 || matrix[i + 1][j] == 0) {
-                    horizontal = -1;
-                    vertical = 0;
-                }
-            }
-            //moving upwards
-            else {
-                if (i == 0 || matrix[i - 1][j] == 0) {
-                    horizontal = 1;
-                    vertical = 0;
-                }
-            }
-            answer.push_back(matrix[i][j]);
-            matrix[i][j] = 0;
-            i += vertical;
-            j += horizontal;
-            counter++;
+            rowBegin++;
+            colBegin++;
+            rowEnd--;
+            colEnd--;
         }
-        return answer;
+        return spiral;
     }
 };
