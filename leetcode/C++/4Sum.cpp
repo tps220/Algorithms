@@ -23,8 +23,7 @@ public:
         //aim represents the idea that c + d = target - a - b
         int aim = target - a - b;
         //initialize starting indexes
-        int left = j + 1;
-        int right = (int)nums.size() - 1;
+        int left = j + 1, right = (int)nums.size() - 1;
         //continue to decrease the window until the left and right
         //indexes overlap and start creating duplicate tuples
         while (right > left) {
@@ -43,22 +42,12 @@ public:
           //if equal, then add to the collection and update the indexes
           else {
             //create the instance for insertion of the 4-tuple
-            vector<int> instance;
-            instance.push_back(a);
-            instance.push_back(b);
-            instance.push_back(nums[left]);
-            instance.push_back(nums[right]);
-            //insert the new addition to the result
-            result.push_back(instance);
+            const int solution[4] = { nums[i], nums[j], nums[left], nums[right] };
+            result.push_back(vector<int>(solution, solution + 4));
+            
             //update the left and right indexes to avoid any duplicates
-            left++;
-            right--;
-            while (right > left && nums[left] == nums[left - 1]) {
-              left++;
-            }
-            while (right > left && nums[right] == nums[right + 1]) {
-              right--;
-            }
+            while (left < right && nums[left] == solution[2]) left++;
+            while (left < right && nums[right] == solution[3]) right--;
           }
         }
         while (j < nums.size() - 2 && nums[j] == nums[j + 1]) {

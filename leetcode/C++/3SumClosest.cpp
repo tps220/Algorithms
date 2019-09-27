@@ -22,8 +22,7 @@ public:
       //aim represents the sum we want to achieve
       int aim = target - nums[i];
       //initialize indexes
-      int left = i + 1;
-      int right = nums.size() - 1;
+      int left = i + 1, right = nums.size() - 1;
       //continue to try to narrow the window of the sum
       while (right > left) {
         int sum = nums[left] + nums[right];

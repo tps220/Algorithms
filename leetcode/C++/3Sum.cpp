@@ -24,8 +24,7 @@ public:
         return result;
       }
       //starting and ending indexes
-      int left = i + 1;
-      int right = nums.size() - 1;
+      int left = i + 1, right = nums.size() - 1;
       //continually decrement the window and compare the current sum to 0
       while (right > left) {
         int sum = nums[left] + nums[right];
@@ -42,18 +41,13 @@ public:
         //otherwise the sum is equal to zero, and we have a candidate
         else {
           //create the vector to insert to the collection
-          vector<int> insert;
-          insert.push_back(target);
-          insert.push_back(nums[left]);
-          insert.push_back(nums[right]);
-          //push the new 3-tuple to the collection
-          result.push_back(insert);
-          //update the positions
-          left++;
-          right--;
-          while (right > left && nums[left] == nums[left - 1]) {
-            left++;
-          }
+          int l = nums[left];
+          int r = nums[right];
+          pushSolution(result, l, r, -target);
+          
+          //update positions
+          while (left < right && nums[left] == l) left++;
+          while (left < right && nums[right] == r) right--;
         }
       }
       while (i < (int)nums.size() - 2 && nums[i] == nums[i + 1]) {
@@ -61,5 +55,13 @@ public:
       }
     }
     return result;
+  }
+private:
+  void pushSolution(vector<vector<int> >&set, int a, int b, int c) {
+    vector<int> vals;
+    vals.push_back(a);
+    vals.push_back(b);
+    vals.push_back(c);
+    set.push_back(vals);
   }
 };
